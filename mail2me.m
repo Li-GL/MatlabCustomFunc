@@ -1,7 +1,7 @@
 function mail2me(mailaddress, subject, content)
 % mail2me(mailaddress, subject, content)
 mail='lglfa666@gmail.com';
-password='lgl521521';
+password=''; %input your password
 setpref('Internet','E_mail',mail);
 setpref('Internet','SMTP_Server','smtp.gmail.com');
 setpref('Internet','SMTP_Username',mail);
