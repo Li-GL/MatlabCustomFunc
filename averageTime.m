@@ -7,7 +7,6 @@ function [outDatetime outputData] = averageTime(inputDatetime, inputData,startTi
 %Unit of timeInterval and removeTime is min
 % do averaging every timeInterval time
 % 14:30代表的是14:00-14:30
-
 %%譬如想平均14:00 - 14:15的数据，但是14:00-14:02和14:13-14:15的数据不参与平均，则输入应该为
 %averageTime(inputDatetime, inputData,14:00, 15, 2)
 %注意这里假设开始时间inputDatetime(1) = 14:00
