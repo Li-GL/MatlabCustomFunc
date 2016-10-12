@@ -1,5 +1,6 @@
 function [outDatetime outputData] = averageTime(inputDatetime, inputData,startTime, timeInterval, removeTime)
-%[outDatetime outputData] = averageTime(inputDateime, inputData,timeInterval, startTime )
+%[outDatetime outputData] = averageTime(inputDatetime, inputData,startTime, timeInterval, removeTime)
+% averageTime(dateNum, inputData,dateNum(1), 15(min), 2(min))
 %Note that inputDateime should be dateNumber. 
 % startTime is when you start the experiment, it's date Number, usually equals to inputDatetime(1)
 % timeInterval is the interval you want to do averaging, removeTime is time
@@ -24,7 +25,7 @@ while time <= inputDatetime(end)
     
     
     
-    ind = find(inputDatetime>= time + removeTime & inputDatetime<=(time+i*timeinterval_num-removeTime));
+    ind = find(inputDatetime>= time + removeTime & inputDatetime<(time+timeinterval_num-removeTime));
     outDatetime(i) = startTime+i*timeinterval_num;
     outputData(i) = nanmean(inputData(ind));
     
