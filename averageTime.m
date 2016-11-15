@@ -1,5 +1,5 @@
-function [outDatetime outputData] = averageTime(inputDatetime, inputData,startTime, timeInterval, removeTime)
-%[outDatetime outputData] = averageTime(inputDatetime, inputData,startTime, timeInterval, removeTime)
+function [outDatetime, outputData] = averageTime(Datetime_num, inputData,startTime_str, endTime_str, timeInterval_min, removeTime_min)
+%[outDatetime, outputData] = averageTime(Datetime_num, inputData,startTime_str, endTime_str, timeInterval_min, removeTime_min)
 % averageTime(dateNum, inputData,dateNum(1), 15(min), 2(min))
 %Note that inputDateime should be dateNumber. 
 % startTime is when you start the experiment, it's date Number, usually equals to inputDatetime(1)
@@ -9,27 +9,26 @@ function [outDatetime outputData] = averageTime(inputDatetime, inputData,startTi
 % do averaging every timeInterval time
 % 14:30代表的是14:00-14:30
 %%譬如想平均14:00 - 14:15的数据，但是14:00-14:02和14:13-14:15的数据不参与平均，则输入应该为
-%averageTime(inputDatetime, inputData,14:00, 15, 2)
-%注意这里假设开始时间inputDatetime(1) = 14:00
+%[outTime, outBC33] = averageTime(dt_ae33_num, BC33_880,'2016-10-30 07:20', '2016-10-30 20:00',10,1)
+
+timeinterval_num = timeInterval_min/60/24;
+removeTime_min = removeTime_min/60/24;
 
 
-timeinterval_num = timeInterval/60/24;
-removeTime = removeTime/60/24;
-
-
-time=startTime;
+time=datenum(startTime_str);
+startTime_num = datenum(startTime_str);
 
 %找index，消除NAN求平均nanmean
 i=1;
-while time <= inputDatetime(end)
+while time <= datenum(endTime_str)
     
     
     
-    ind = find(inputDatetime>= time + removeTime & inputDatetime<(time+timeinterval_num-removeTime));
-    outDatetime(i) = startTime+i*timeinterval_num;
+    ind = find(Datetime_num>= time + removeTime_min & Datetime_num<(time+timeinterval_num-removeTime_min));
+    outDatetime(i) = startTime_num+i*timeinterval_num;
     outputData(i) = nanmean(inputData(ind));
     
-    time = startTime+i*timeinterval_num;
+    time = startTime_num+i*timeinterval_num;
     
     
     i=i+1;
