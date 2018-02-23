@@ -1,5 +1,4 @@
-
-function [dt_ae33_num BC33_880 BC33_370] = readAE33 (Input_filename);
+function [dt_ae33_num, BC33_880, BC33_all] = readAE33 (Input_filename)
 % Reading AE33 data  %% flash disk version
 % [dt_ae33_num BC33_880 BC33_370] = readAE33 (Input_filename);
 % Note that the unit is ng/m^3, if BC33_880<=0, set it to NaN
@@ -20,4 +19,12 @@ BC33_880=IR1;
 BC33_880(BC33_880<=0)=NaN;
 BC33_370 = UV;
 BC33_370(BC33_370<=0) = NaN;
+
+% remove outlier
+
+
+BC33_all = [UV Blue Green Yellow Red IR1 IR2];
+BC33_all(BC33_all<=0) = NaN;
+
+
 end
